@@ -1,5 +1,5 @@
 package com.ds.algo;
 
-public class CycleSort {
+public class HeapSort {
 
 }
