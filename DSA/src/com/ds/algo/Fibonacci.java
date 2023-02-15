@@ -18,6 +18,12 @@ public class Fibonacci {
 			fabonacciSeries.add(value);
 		}
 	}
+	
+	public static int fibonacciRecursive(int length) {
+		if(length<=1) return length;
+		return fibonacciRecursive(length-1) + fibonacciRecursive(length-2);
+	}
+	
 
 	public static void main(String[] args) {
 
@@ -27,6 +33,9 @@ public class Fibonacci {
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
 		}
+		
+		
+		System.out.println(fibonacciRecursive(5));
 	}
 
 }
