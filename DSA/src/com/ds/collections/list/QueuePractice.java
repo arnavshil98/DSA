@@ -1,10 +1,12 @@
 package com.ds.collections.list;
 
-public class Infix {
+import java.util.List;
+import java.util.Queue;
+
+public class QueuePractice {
 
 	public static void main(String[] args) {
 
 	}
 
 }
- 
