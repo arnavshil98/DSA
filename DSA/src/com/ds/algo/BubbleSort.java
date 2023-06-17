@@ -1,7 +1,5 @@
 package com.ds.algo;
 
-import java.lang.reflect.Array;
-
 public class BubbleSort {
 
 	/*

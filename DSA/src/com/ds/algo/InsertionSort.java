@@ -10,7 +10,12 @@ public class InsertionSort {
 	public static void main(String[] args) {
 
 		int[] arr = { 3, 2, 4, 1, 5, 7, 6 };
-
+		/*
+		 * 23|41576, i=1
+		 * 234|1576,i=2
+		 * 1234|576,i=3
+		 * 12345|76,i=4
+		 */
 		for (int i = 1; i < arr.length; i++) {
 			int key = arr[i];
 			int j = i-1;

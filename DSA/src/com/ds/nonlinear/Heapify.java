@@ -11,7 +11,7 @@ public class Heapify {
 		 *    20
 		 *  10   30
 		 * 5 50 40 45
-		 * we will start from 30 = length/2
+		 * we will start from 30 = (length/2)-1
 		 */
 		// time complexity: O(N)
 	public void buildHeap(int[] arr) {	

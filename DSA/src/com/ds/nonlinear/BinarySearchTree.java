@@ -62,7 +62,11 @@ public class BinarySearchTree {
 	}
 
 	static Queue<Node> queue = new LinkedList<Node>();
+	private static Node searchingNode;
 
+	/*
+	 * this is iterative approach
+	 */
 	public static void levelOrderTraversal(Node root) {
 		if (queue.isEmpty()) {
 			queue.add(root);
@@ -81,10 +85,71 @@ public class BinarySearchTree {
 
 	}
 
+	public static Node searchingNode(Node node, int datamember) {
+		while (node != null) {
+			if (node.datamember == datamember)
+				break;
+			if (datamember < node.datamember) {
+				node = node.left;
+			} else {
+				node = node.right;
+			}
+
+		}
+		return node;
+	}
+
+	public static Node deleteNode(Node node, int datamamber) {
+		Node deletingNode = searchingNode(node, datamamber);
+
+		Node ancestorNodeOfDeletingNode = null;
+		Node nextAncestorNode = node;
+		while (nextAncestorNode != null) {
+			if (nextAncestorNode.datamember == deletingNode.datamember)
+				break;
+			if (deletingNode.datamember <= nextAncestorNode.datamember) {
+				ancestorNodeOfDeletingNode = nextAncestorNode;
+				nextAncestorNode = nextAncestorNode.left;
+			} else {
+				ancestorNodeOfDeletingNode = nextAncestorNode;
+				nextAncestorNode = nextAncestorNode.right;
+			}
+		}
+		/*
+		 * right subtree, lowest node
+		 */
+		Node leftChildNode = deletingNode.left;
+		Node rightChildNode = deletingNode.right;
+		Node nextNode = deletingNode.right;
+		Node ancestorNode = null;
+		while (nextNode.left != null) {
+			ancestorNode = nextNode;
+			nextNode = nextNode.left;
+		}
+		Node floatingNode = nextNode.right;
+
+		deletingNode = nextNode;
+		deletingNode.left = leftChildNode;
+		deletingNode.right = rightChildNode;
+		if (ancestorNodeOfDeletingNode.datamember >= deletingNode.datamember) {
+			ancestorNodeOfDeletingNode.left = deletingNode;
+		} else {
+			ancestorNodeOfDeletingNode.right = deletingNode;
+		}
+
+		ancestorNode.left = floatingNode;
+
+		return node;
+	}
+
+	public void longestPath(Node root) {
+
+	}
+
 	public static void main(String[] args) {
 		Node root = null;
 		Node originalRoot = null;
-		int[] arr = { 42, 33, 55, 21, 39, 41 }; // BST
+		int[] arr = { 38, 24, 45, 20, 30, 15, 28, 35, 29 }; // BST
 		for (int i : arr) {
 			if (root == null) {
 				root = insertElement(root, i);
@@ -95,12 +160,20 @@ public class BinarySearchTree {
 		}
 
 		System.out.println("in order traversal:");
-		inorderTraversal(originalRoot);
+		// inorderTraversal(originalRoot);
 
 		System.out.println(" \n" + "height of node: " + originalRoot.datamember + " is \n" + height(originalRoot));
 
 		System.out.println("level-order traversal:");
 		levelOrderTraversal(originalRoot);
+
+		System.out.println("searching node in BST: O(nlogn)");
+		Node newNode = searchingNode(originalRoot, 35);
+		System.out.println(newNode.datamember);
+
+		deleteNode(originalRoot, 24);
+		System.out.println("in-order traversal after deleting node:");
+		inorderTraversal(originalRoot);
 	}
 
 }
